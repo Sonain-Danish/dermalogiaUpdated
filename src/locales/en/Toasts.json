@@ -1,0 +1,14 @@
+{
+  "Copied to clipboard!": "Copied to clipboard!",
+  "Fetching Location!": "Fetching Location!",
+  "Geolocation is not supported by your browser": { "": "Geolocation is not supported by your browser." },
+  "Location link copied to clipboard!": "Location link copied to clipboard!",
+  "Unable to fetch location": {
+    " Please Allow Location Permission": { "": "Unable to fetch location. Please Allow Location Permission." },
+    " Please check your permissions": { "": "Unable to fetch location. Please check your permissions." },
+    " Please make sure you have enabled location for Browser in your device": {
+      "": "Unable to fetch location. Please make sure you have enabled location for Browser in your device."
+    },
+    " Unable to find your exact Location": { "": "Unable to fetch location. Unable to find your exact Location." }
+  }
+}

@@ -1,0 +1,62 @@
+                                                                           @import "tailwindcss";
+
+:root {
+  /* Light Mode */
+  --background-primary: #FFFFFF;
+  --background-secondary: #F7F9FB;
+  --text-primary: #5B6770;
+  --text-body: #5B6770;
+  --text-secondary-1: #6D7275;
+  --text-secondary-2: #AAAAAA;
+  --text-placeholder: #6D7275;
+  --brand-primary: #5B6770;
+  --cta-bg: #5B6770;
+  --cta-text: #FFFFFF;
+  --cta-secondary: #5D94D6 ;
+  --border-divider: #E0E0E0;
+  --success: #1B8639;
+  --error: #DC362E;
+  --scrollbar: #8e8e8e;
+}
+
+/* Increased specificity to ensure override works */
+:root[data-theme="dark"] {
+  /* Dark Mode */
+  --background-primary: #0F1216;
+  --background-secondary: #171C22;
+  --text-primary: #FFFFFF;
+  --text-body: #C9D1D9;
+  --text-secondary-1: #8B949E;
+  --text-secondary-2: #666666;
+  --text-placeholder: #6D7275;
+  --brand-primary: #7E8B96;
+  --cta-bg: #7E8B96;
+  --cta-text: #000000;
+  --cta-secondary: #79B8FF;
+  --border-divider: #2A3138;
+  --success: #2FBF5F;
+  --error: #FF5A52;
+  --scrollbar: #8e8e8e;
+}
+
+@theme inline {
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-text-primary: var(--text-primary);
+  --color-text-body: var(--text-body);
+  --color-text-secondary-1: var(--text-secondary-1);
+  --color-text-secondary-2: var(--text-secondary-2);
+  --color-text-placeholder: var(--text-placeholder);
+  --color-brand-primary: var(--brand-primary);
+  --color-cta-bg: var(--cta-bg);
+  --color-cta-text: var(--cta-text);
+  --color-border-divider: var(--border-divider);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-scrollbar: var(--scrollbar);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-arpona: var(--font-arpona); 
+}
+

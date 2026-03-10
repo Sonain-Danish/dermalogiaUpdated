@@ -1,0 +1,14 @@
+{
+  "Copied to clipboard!": "Zkopírováno do schránky!",
+  "Fetching Location!": "Načítání polohy!",
+  "Geolocation is not supported by your browser": { "": "Geolokace není vaším prohlížečem podporována." },
+  "Location link copied to clipboard!": "Odkaz na polohu zkopírován do schránky!",
+  "Unable to fetch location": {
+    " Please Allow Location Permission": { "": "Nelze načíst polohu. Povolte prosím oprávnění k poloze." },
+    " Please check your permissions": { "": "Nelze načíst polohu. Zkontrolujte prosím svá oprávnění." },
+    " Please make sure you have enabled location for Browser in your device": {
+      "": "Nelze načíst polohu. Ujistěte se, že jste povolili polohu pro prohlížeč ve vašem zařízení."
+    },
+    " Unable to find your exact Location": { "": "Nelze načíst polohu. Nelze najít vaši přesnou polohu." }
+  }
+}

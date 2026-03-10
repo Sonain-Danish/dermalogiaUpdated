@@ -1,0 +1,246 @@
+<style>
+  /* Your styles remain the same */
+  h1 {
+    text-align: center;
+  }
+  .lokator-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  iframe {
+    width: 100%;
+    min-height: 400px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+</style>
+
+<div class="lokator-wrapper">
+  <!-- The initial src can be blank or a placeholder, as it will be set by JS -->
+  <iframe
+    width="400"
+    height="150"
+    id="lokatorFrame"
+    src="about:blank"
+    loading="lazy"
+    scrolling="no"
+    allow="geolocation; clipboard-write"
+  ></iframe>
+</div>
+
+<p>
+  <script>
+    (function () {
+      // --- SETUP ---
+      const iframe = document.getElementById("lokatorFrame");
+      if (!iframe) return;
+
+      const baseUrl = "https://www.salonz.cloud"; // always base origin
+      const defaultLocale = "en"; // must match app's i18nConfig.defaultLocale
+      const defaultQuery = ""; // e.g "brand=Zenz+Organic"
+
+      function getLocale() {
+        const m = window.location.pathname.match(/^\/([a-z]{2})(?:\/|$)/);
+        return m ? m[1] : "cs";
+      }
+
+      // Build URL with optional defaultQuery + parent window params
+      function buildUrl({ withDefaultQuery = false, withTheme = true } = {}) {
+        console.log("[SalonLocator] Building URL...");
+        const locale = getLocale();
+        // next-i18n-router strips the default locale prefix — use bare baseUrl for it
+        const localePath = locale === defaultLocale ? "" : `/${locale}`;
+        const u = new URL(`${baseUrl}${localePath}`);
+
+        // 1. Apply defaultQuery (if requested)
+        if (withDefaultQuery && defaultQuery) {
+          const dq = new URLSearchParams(defaultQuery);
+          dq.forEach((v, k) => u.searchParams.set(k, v));
+        }
+
+        // 2. Apply parent window params (e.g. ?brand=Nak+Hair&location=Praha)
+        // These override defaultQuery if keys collide, which is usually desired.
+        const parentParams = new URLSearchParams(window.location.search);
+        if (parentParams.toString()) {
+          console.log("[SalonLocator] Parent params found:", parentParams.toString());
+        }
+        parentParams.forEach((v, k) => {
+          u.searchParams.set(k, v);
+        });
+
+        // 3. Apply Theme
+        if (withTheme) {
+          const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+          u.searchParams.set("theme", theme);
+        }
+
+        return u.href;
+      }
+
+      // ---- NEW: Hard-enforce correct domain (prevents salonz.shop) ----
+      function isWrongOrigin(src) {
+        try {
+          const u = new URL(src);
+          return u.origin !== new URL(baseUrl).origin;
+        } catch (e) {
+          return true;
+        }
+      }
+
+      function forceCorrectOrigin() {
+        const current = iframe.getAttribute("src") || "";
+        if (!current || current === "about:blank" || isWrongOrigin(current)) {
+          const fixed = buildUrl({ withDefaultQuery: true, withTheme: true });
+          console.log("[SalonLocator] Forcing correct iframe origin ->", fixed);
+          iframe.setAttribute("src", fixed);
+          return true;
+        }
+        return false;
+      }
+
+      // --- FIRST LOAD: set src exactly once with defaultQuery+theme ---
+      let firstUrlSet = false;
+      function initIframeOnce() {
+        if (firstUrlSet) return;
+        firstUrlSet = true;
+
+        // NEW: ensure it cannot start on salonz.shop
+        forceCorrectOrigin();
+      }
+
+      // --- SAFETY NET: if something later overwrites src without your query, put it back ONCE ---
+      let reappliedParamsOnce = false;
+
+      function hasAllRequiredParams(u) {
+        // Check defaultQuery
+        if (defaultQuery) {
+          const want = new URLSearchParams(defaultQuery);
+          for (const [k, v] of want) {
+            if (u.searchParams.get(k) !== v) return false;
+          }
+        }
+        // Check parent params
+        const parentParams = new URLSearchParams(window.location.search);
+        for (const [k, v] of parentParams) {
+          if (u.searchParams.get(k) !== v) return false;
+        }
+        return true;
+      }
+
+      function reapplyParamsOnceIfMissing() {
+        if (reappliedParamsOnce) return;
+
+        console.log("[SalonLocator] Checking if params need re-application...");
+
+        // NEW: Always enforce correct origin even if there are no query params
+        if (forceCorrectOrigin()) return;
+
+        // If we have no defaultQuery AND no parent params, nothing else to enforce (theme handled below)
+        const parentParams = new URLSearchParams(window.location.search);
+        const hasParentParams = Array.from(parentParams).length > 0;
+
+        try {
+          const locale = getLocale();
+          const localePath = locale === defaultLocale ? "" : `/${locale}`;
+          const u = new URL(iframe.getAttribute("src") || `${baseUrl}${localePath}`);
+
+          if ((defaultQuery || hasParentParams) && !hasAllRequiredParams(u)) {
+            // Re-apply defaultQuery
+            if (defaultQuery) {
+              const dq = new URLSearchParams(defaultQuery);
+              dq.forEach((v, k) => {
+                if (!u.searchParams.has(k)) u.searchParams.set(k, v);
+              });
+            }
+            // Re-apply parent params
+            parentParams.forEach((v, k) => {
+              if (!u.searchParams.has(k)) u.searchParams.set(k, v);
+            });
+          }
+
+          // Ensure theme
+          const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+          if (u.searchParams.get("theme") !== theme) u.searchParams.set("theme", theme);
+
+          reappliedParamsOnce = true;
+          const fixed = u.href;
+          console.log("Re-applied params once ->", fixed);
+          iframe.setAttribute("src", fixed);
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      // Watch ONLY the iframe's src attribute; if something changes it, verify once.
+      const iframeAttrObserver = new MutationObserver((muts) => {
+        for (const m of muts) {
+          if (m.type === "attributes" && m.attributeName === "src") {
+            console.log("[SalonLocator] Iframe src changed externally:", iframe.getAttribute("src"));
+            // Defer a tick so if another script sets then immediately sets again, we check the final value.
+            setTimeout(reapplyParamsOnceIfMissing, 0);
+          }
+        }
+      });
+      iframeAttrObserver.observe(iframe, { attributes: true, attributeFilter: ["src"] });
+
+      // --- THEME CHANGES (unchanged logic for later toggles, plus origin enforcement) ---
+      function updateIframeThemeLater() {
+        if (!iframe.src || iframe.src === "about:blank") return;
+
+        // NEW: if it got moved to wrong domain, force it back
+        if (forceCorrectOrigin()) return;
+
+        const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        const u = new URL(iframe.src);
+        const cur = u.searchParams.get("theme");
+        if (cur !== theme) {
+          u.searchParams.set("theme", theme);
+          console.log("Theme change ->", u.href);
+          iframe.src = u.href;
+        }
+      }
+
+      // More robust boot: works even if script runs after DOMContentLoaded
+      function boot() {
+        initIframeOnce();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", boot);
+      } else {
+        boot();
+      }
+
+      // Observe body class changes to notify iframe (later only)
+      new MutationObserver((muts) => {
+        for (const m of muts) if (m.attributeName === "class") updateIframeThemeLater();
+      }).observe(document.body, { attributes: true });
+
+      // Your postMessage listener (unchanged)
+      window.addEventListener("message", function (event) {
+        if (event.origin !== baseUrl) return;
+        console.log("[SalonLocator] Received message:", event.data);
+        const data = event.data;
+        if (typeof data !== "object" || !data.type) return;
+
+        switch (data.type) {
+          case "resize":
+            if (data.height) iframe.style.height = data.height + "px";
+            break;
+          case "scrollToTop":
+            iframe.scrollIntoView({ behavior: "smooth", block: "start" });
+            break;
+          case "scrollToBottom":
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+            break;
+          case "copyToClipboard":
+            if (data.payload) navigator.clipboard.writeText(data.payload).catch(() => {});
+            break;
+        }
+      });
+    })();
+  </script>
+</p>
