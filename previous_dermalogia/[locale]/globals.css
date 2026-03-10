@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  font-family: var(--font-helveticaNeue), sans-serif; /* Apply custom local font globally */
+}
+
+::-moz-selection {
+  background: #7E868C; /* Dark gray */
+  color: white; /* Ensures text remains readable */
+}
+::selection {
+  background: #7E868C; /* Dark gray */
+  color: white; /* Ensures text remains readable */
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@theme {
+  --color-primary-grey: #5b6770; 
+  --color-primary-text: #5D676F; 
+  --color-primary-link: #6A93D1; 
+  --color-primary-text2: #7E868C; 
+  --color-primary-text2-light: #9EA5B3; 
+  /* --color-primary-unavialable-link: #F3F4F6;  */
+  --color-primary-unavialable-link: #eeeeee; 
+
+}
+
+
+@theme {
+  --breakpoint-custom-md: 860px;
+}
+

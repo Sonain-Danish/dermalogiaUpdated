@@ -10,7 +10,7 @@ export default function SearchLayout({ children }: { children: React.ReactNode }
     <div className="bg-background-primary pb-20">
       {/* Breadcrumbs */}
       {/* <div className="bg-background-secondary py-3 border-b border-border-divider">
-        <div className="container mx-auto px-4 text-sm font-arpona flex items-center gap-2">
+        <div className="container mx-auto px-4 text-sm font-helvetica flex items-center gap-2">
           <span className="text-text-primary">{t("breadcrumbs.home", "Home")}</span>
           <span className="text-text-secondary-1">/</span>
           <span className="text-text-secondary-1">{t("breadcrumbs.salons", "Salons")}</span>

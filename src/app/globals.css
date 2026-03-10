@@ -50,6 +50,7 @@
   --color-brand-primary: var(--brand-primary);
   --color-cta-bg: var(--cta-bg);
   --color-cta-text: var(--cta-text);
+  --color-cta-secondary: var(--cta-secondary);
   --color-border-divider: var(--border-divider);
   --color-success: var(--success);
   --color-error: var(--error);
@@ -57,6 +58,7 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-arpona: var(--font-arpona); 
+  --font-helveticaNeue: var(--font-helveticaNeue); 
+  --font-helvetica: var(--font-helvetica); 
 }
 

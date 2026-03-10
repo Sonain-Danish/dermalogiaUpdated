@@ -206,7 +206,9 @@ export const MapFilterBar = () => {
         setIsLocating(false);
         // Optionally show specific errors
         if (error.code === error.PERMISSION_DENIED) {
-          alert(t("Please allow location access to use this feature.", "Please allow location access to use this feature."));
+          alert(
+            t("Please allow location access to use this feature.", "Please allow location access to use this feature."),
+          );
         }
       },
     );
@@ -226,12 +228,14 @@ export const MapFilterBar = () => {
   });
 
   return (
-    <div className="bg-white dark:bg-background-secondary rounded-none shadow-[0px_24px_60px_0px_rgba(0,0,0,0.12)] px-6 py-[19.5px] flex flex-col md:flex-row items-center gap-6 md:gap-8 w-full max-w-212.25 mx-auto relative z-10 border -translate-y-20 border-border-divider">
+    <div className="bg-white dark:bg-background-secondary rounded-lg shadow-[0px_24px_60px_0px_rgba(0,0,0,0.12)] px-6 py-[19.5px] flex flex-col md:flex-row items-center gap-6 md:gap-8 w-full max-w-212.25 mx-auto relative z-10 border -translate-y-20 border-border-divider">
       {/* Search Input Section */}
       <div className="flex-1 w-full relative z-50">
         <div className="flex items-center gap-4 h-full">
           <div className="flex-1 flex flex-col gap-1.5 w-full">
-            <label className="font-arpona text-base text-text-primary text-start leading-none ">{t("Location Label")}</label>
+            <label className="font-helvetica text-base text-text-primary text-start leading-none ">
+              {t("Location Label")}
+            </label>
             <div className="relative flex items-center w-full h-full">
               <input
                 type="text"
@@ -259,7 +263,7 @@ export const MapFilterBar = () => {
           </div>
           {/* Target Icon */}
           <div
-            className={`shrink-0 text-text-primary cursor-pointer hover:opacity-70 flex items-center justify-center  ${isLocating ? "animate-pulse opacity-50 cursor-wait" : ""}`}
+            className={`shrink-0 text-cta-secondary cursor-pointer hover:opacity-70 flex items-center justify-center  ${isLocating ? "animate-pulse opacity-50 cursor-wait" : ""}`}
             title={t("My Location")}
             onClick={isLocating ? undefined : handleMyLocation}
           >
@@ -291,7 +295,9 @@ export const MapFilterBar = () => {
 
       {/* Brand Select Section */}
       <div className="flex-1 flex flex-col gap-1.5            w-full relative z-40">
-        <label className="font-arpona text-base text-text-primary block text-start leading-none">{t("Brand Label")}</label>
+        <label className="font-helvetica text-base text-text-primary block text-start leading-none">
+          {t("Brand Label")}
+        </label>
         <div className="relative flex items-center justify-between cursor-pointer" onClick={handleBrandArrowClick}>
           <input
             type="text"
@@ -363,7 +369,7 @@ export const MapFilterBar = () => {
       {/* Button */}
       <button
         onClick={() => triggerSearch(localSearch)}
-        className="bg-cta-bg text-cta-text font-arpona hover:cursor-pointer uppercase pr-6 pl-3 py-2 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity w-full md:w-auto min-w-45"
+        className="bg-cta-bg text-cta-text font-helvetica rounded-lg hover:cursor-pointer uppercase pr-6 pl-3 py-2 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity w-full md:w-auto min-w-45"
       >
         <CiSearch className="w-5 h-5" />
         <span>{t("Find Salons")}</span>

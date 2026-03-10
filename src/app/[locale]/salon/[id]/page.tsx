@@ -107,7 +107,7 @@ export default function SalonDetailPage() {
                     </span>
                   </div>
 
-                  <h1 className="text-[26px] font-light font-arpona leading-tight text-text-primary wrap-break-word">
+                  <h1 className="text-[26px] font-light font-helvetica leading-tight text-text-primary wrap-break-word">
                     {salon.name}
                   </h1>
 
@@ -115,7 +115,7 @@ export default function SalonDetailPage() {
                     <div className="flex items-start gap-2">
                       <FiMapPin className="w-4.5 h-4.5 mt-1 shrink-0 text-brand-primary" />
                       <div className="flex flex-col">
-                        <h3 className="hidden sm:block font-arpona uppercase tracking-wider text-text-secondary-1">
+                        <h3 className="hidden sm:block font-helvetica uppercase tracking-wider text-text-secondary-1">
                           {t("Location Label")}
                         </h3>
                         <span className="text-text-primary font-medium">{salon.address}</span>
@@ -125,7 +125,7 @@ export default function SalonDetailPage() {
                     <div className="flex items-start gap-2">
                       <BsTelephone className="w-4.5 h-4.5 mt-1 shrink-0 text-brand-primary" />
                       <div className="flex flex-col">
-                        <h3 className="hidden sm:block font-arpona uppercase tracking-wider text-text-secondary-1">
+                        <h3 className="hidden sm:block font-helvetica uppercase tracking-wider text-text-secondary-1">
                           {t("Phone Number")}
                         </h3>
                         <span className="text-text-primary font-medium">{salon.phone}</span>
@@ -135,7 +135,7 @@ export default function SalonDetailPage() {
                     <div className="flex items-start gap-2">
                       <PiGlobeSimpleLight className="w-5 h-5 mt-0.5 shrink-0 text-brand-primary" />
                       <div className="flex flex-col">
-                        <h3 className="hidden sm:block font-arpona uppercase tracking-wider text-text-secondary-1">
+                        <h3 className="hidden sm:block font-helvetica uppercase tracking-wider text-text-secondary-1">
                           {t("Website")}
                         </h3>
                         <a
@@ -150,9 +150,15 @@ export default function SalonDetailPage() {
                     </div>
 
                     <div className="flex items-start gap-2">
-                      <Image src="/clock_brand.svg" width={20} height={20} alt="clock icon" className="w-5 h-5 mt-0.5 shrink-0" />
+                      <Image
+                        src="/clock_brand.svg"
+                        width={20}
+                        height={20}
+                        alt="clock icon"
+                        className="w-5 h-5 mt-0.5 shrink-0"
+                      />
                       <div className="flex flex-col">
-                        <h3 className="hidden sm:block font-arpona uppercase tracking-wider text-text-secondary-1">
+                        <h3 className="hidden sm:block font-helvetica uppercase tracking-wider text-text-secondary-1">
                           {t("Opening Hours")}
                         </h3>
                         <SalonOpeningHours status={status} nextTime={nextTime} salonTiming={salon.salonTiming} />
@@ -245,7 +251,9 @@ function SectionAbout({ salon, t }: { salon: ExtendedSalon; t: TFunction }) {
   if (!salon.description) return null;
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-arpona">{t("About Salon")}</h3>
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">
+        {t("About Salon")}
+      </h3>
       <div className="prose prose-stone max-w-none text-text-body font-light leading-relaxed text-sm lg:text-base">
         <p>{salon.description}</p>
         <p className="mt-4">{t("About Boilerplate")}</p>
@@ -259,7 +267,9 @@ function SectionServices({ salon, t }: { salon: Salon; t: TFunction }) {
   if (services.length === 0) return null;
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-arpona">{t("Services")}</h3>
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">
+        {t("Services")}
+      </h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
         {services.map((service: SalonService, idx: number) => (
           <li key={idx} className="flex items-center gap-3 text-text-body font-light text-sm lg:text-base">
@@ -276,13 +286,13 @@ function SectionBrands({ salon, t }: { salon: Salon; t: TFunction }) {
   const brands = salon.brands || [];
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-arpona">{t("Brands")}</h3>
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">{t("Brands")}</h3>
       <div className="flex flex-wrap gap-3">
         {brands.length > 0 ? (
           brands.map((brand: Brand, idx: number) => (
             <span
               key={idx}
-              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/40 text-text-primary text-sm uppercase tracking-wider font-arpona font-normal"
+              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/40 text-text-primary text-sm uppercase tracking-wider font-helvetica font-normal"
             >
               {brand.name}
             </span>
@@ -299,7 +309,9 @@ function SectionCertification({ salon, t }: { salon: Salon; t: TFunction }) {
   const certificates = salon.certificates || [];
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-arpona">{t("Certifications")}</h3>
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">
+        {t("Certifications")}
+      </h3>
       <div className="flex flex-wrap gap-8">
         {certificates.length > 0 ? (
           certificates.map((cert: Certificate, idx: number) => (
@@ -325,7 +337,7 @@ function SectionReviews({ salon, t }: { salon: Salon; t: TFunction }) {
 
   return (
     <div className="flex flex-col gap-6 mb-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-arpona">{t("Reviews")}</h3>
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">{t("Reviews")}</h3>
       <div className="flex flex-col gap-10">
         {reviews.map((review: SalonReview, idx: number) => {
           const author = review.authorAttribution?.displayName || "Anonymous";

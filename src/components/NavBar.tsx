@@ -33,12 +33,14 @@ export const NavBar = () => {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className={clsx("fixed top-0 left-0 right-0 z-50 w-full bg-background-primary border-b border-border-divider")}
     >
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center h-[64px] md:h-auto">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center h-16 md:h-auto">
         {/* Desktop Left: Menu & Search */}
         <div className="hidden md:flex items-center gap-6">
           <button className="flex items-center gap-2 group">
             <IoMenu className="w-6 h-6" />
-            <span className="font-arpona text-sm uppercase font-light tracking-wide group-hover:underline">Menu</span>
+            <span className="font-helvetica text-sm uppercase font-light tracking-wide group-hover:underline">
+              Menu
+            </span>
           </button>
           <button>
             <IoSearch className="w-6 h-6" />
@@ -56,7 +58,7 @@ export const NavBar = () => {
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <NextLink href="/">
             {/* Logo dimensions from Figma: Desktop 208x39, Mobile 177x33 */}
-            <div className="relative w-[177px] h-[33px] md:w-[208px] md:h-[40px]">
+            <div className="relative w-44.25 h-8.25 md:w-52 md:h-10">
               <Image src="/assets/logo.svg" alt="Salon Online" fill className="object-contain" priority />
             </div>
           </NextLink>
