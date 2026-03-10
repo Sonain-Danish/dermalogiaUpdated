@@ -45,7 +45,7 @@ export const SalonImageGallery = ({ salon, matchHeight = false }: SalonImageGall
   return (
     <div className="h-full">
       <div
-        className={`relative w-full overflow-hidden rounded-none bg-background-secondary group ${
+        className={`relative w-full overflow-hidden rounded-lg bg-background-secondary group ${
           matchHeight ? "aspect-4/3 lg:aspect-auto lg:h-full lg:min-h-104.5" : "aspect-4/3 lg:aspect-5/3"
         }`}
       >
@@ -63,17 +63,17 @@ export const SalonImageGallery = ({ salon, matchHeight = false }: SalonImageGall
           <>
             <button
               onClick={prevSlide}
-              className="absolute top-1/2 left-4 -translate-y-1/2 w-10 h-10 bg-background-primary/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background-secondary transition-colors z-10"
+              className="absolute top-1/2 left-4 -translate-y-1/2 w-10 h-10 bg-background-secondary/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background-secondary transition-colors z-10"
               aria-label="Previous image"
             >
-              <FiChevronLeft className="w-6 h-6 text-text-primary" />
+              <FiChevronLeft className="w-6 h-6 text-cta-secondary" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute top-1/2 right-4 -translate-y-1/2 w-10 h-10 bg-background-primary/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background-secondary transition-colors z-10"
+              className="absolute top-1/2 right-4 -translate-y-1/2 w-10 h-10 bg-background-secondary/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-background-secondary transition-colors z-10"
               aria-label="Next image"
             >
-              <FiChevronRight className="w-6 h-6 text-text-primary" />
+              <FiChevronRight className="w-6 h-6 text-cta-secondary" />
             </button>
           </>
         )}
@@ -86,7 +86,7 @@ export const SalonImageGallery = ({ salon, matchHeight = false }: SalonImageGall
                 key={i}
                 onClick={() => goToSlide(i)}
                 className={`w-2 h-2 rounded-full transition-all ${
-                  i === currentIndex ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+                  i === currentIndex ? "bg-cta-secondary w-6" : "bg-white hover:bg-white/80"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />

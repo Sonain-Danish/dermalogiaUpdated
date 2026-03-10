@@ -1,4 +1,4 @@
-                                                                           @import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   /* Light Mode */
@@ -31,7 +31,7 @@
   --text-placeholder: #6D7275;
   --brand-primary: #7E8B96;
   --cta-bg: #7E8B96;
-  --cta-text: #000000;
+  --cta-text: #FFFFFF;
   --cta-secondary: #79B8FF;
   --border-divider: #2A3138;
   --success: #2FBF5F;

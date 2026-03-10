@@ -70,12 +70,12 @@ export const ShareDialog = ({ salon, isOpen, onClose, url: overrideUrl }: ShareD
         <p className="text-text-secondary-1 font-light text-sm mb-6 leading-relaxed">{t("Share Subtitle")}</p>
 
         {/* URL Input */}
-        <div className="flex items-center gap-3 border border-border-divider p-3 mb-6 bg-background-primary">
+        <div className="flex items-center gap-3 border border-border-divider rounded-sm p-3 mb-6 bg-background-primary">
           <FiLink className="w-5 h-5 text-text-secondary-1 shrink-0" />
           <span className="flex-1 truncate text-sm text-text-primary">{shareUrl}</span>
           <button
             onClick={copyToClipboard}
-            className="bg-black text-white p-2.5  hover:bg-gray-800 transition-colors shrink-0"
+            className="bg-cta-bg text-cta-text p-2.5 rounded-sm hover:bg-cta-bg/80 transition-colors shrink-0"
             title={t("Copy Link Button")}
           >
             <FiCopy className="w-4 h-4" />
@@ -90,7 +90,7 @@ export const ShareDialog = ({ salon, isOpen, onClose, url: overrideUrl }: ShareD
             rel="noopener noreferrer"
             className="group"
           >
-            <div className="w-12 h-12 border border-border-divider bg-background-primary flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
+            <div className="w-12 h-12 bg-border-divider rounded-sm flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
               <FaFacebookF className="w-5 h-5" />
             </div>
           </a>
@@ -101,13 +101,13 @@ export const ShareDialog = ({ salon, isOpen, onClose, url: overrideUrl }: ShareD
             rel="noopener noreferrer"
             className="group"
           >
-            <div className="w-12 h-12 border border-border-divider bg-background-primary flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
+            <div className="w-12 h-12 bg-border-divider rounded-sm flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
               <FaXTwitter className="w-5 h-5" />
             </div>
           </a>
 
           <a href={`https://www.instagram.com/`} target="_blank" rel="noopener noreferrer" className="group">
-            <div className="w-12 h-12 border border-border-divider bg-background-primary flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
+            <div className="w-12 h-12 bg-border-divider rounded-sm flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
               <FaInstagram className="w-6 h-6" />
             </div>
           </a>
@@ -118,7 +118,7 @@ export const ShareDialog = ({ salon, isOpen, onClose, url: overrideUrl }: ShareD
             rel="noopener noreferrer"
             className="group"
           >
-            <div className="w-12 h-12 border border-border-divider bg-background-primary flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
+            <div className="w-12 h-12 bg-border-divider rounded-sm flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
               <FaWhatsapp className="w-6 h-6" />
             </div>
           </a>
@@ -127,7 +127,7 @@ export const ShareDialog = ({ salon, isOpen, onClose, url: overrideUrl }: ShareD
             href={`mailto:?subject=${encodeURIComponent(shareText)}&body=${encodeURIComponent(shareUrl)}`}
             className="group"
           >
-            <div className="w-12 h-12  border border-border-divider bg-background-primary flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
+            <div className="w-12 h-12  bg-border-divider rounded-sm flex items-center justify-center text-text-primary transition-all group-hover:border-text-primary group-hover:bg-background-secondary">
               <FaEnvelope className="w-5 h-5" />
             </div>
           </a>
