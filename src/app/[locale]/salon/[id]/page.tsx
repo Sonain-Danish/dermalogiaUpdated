@@ -97,43 +97,43 @@ export default function SalonDetailPage() {
                       {[1, 2, 3, 4, 5].map((_, i) => (
                         <FiStar
                           key={i}
-                          className={`w-3.5 h-3.5 ${i < Math.floor(salon.rating || 0) ? "fill-text-primary text-text-primary" : "text-text-secondary-2"}`}
+                          className={`w-3.5 h-3.5 ${i < Math.floor(salon.rating || 0) ? "fill-cta-secondary text-cta-secondary" : "text-cta-secondary/20 fill-cta-secondary/20"}`}
                         />
                       ))}
                     </div>
-                    <span className="font-medium text-sm text-text-primary">{salon.rating || 0}</span>
-                    <span className="text-text-secondary-1 text-sm font-light">
+                    <span className="font-light font-helvetica text-sm text-text-primary">{salon.rating || 0}</span>
+                    <span className="text-text-secondary-1 text-sm font-light font-helvetica">
                       ({salon.ratingCount || 0} {t("Reviews").toLowerCase()})
                     </span>
                   </div>
 
-                  <h1 className="text-[26px] font-light font-helvetica leading-tight text-text-primary wrap-break-word">
+                  <h1 className="text-[26px] font-light font-helveticaNeue leading-tight text-text-primary wrap-break-word">
                     {salon.name}
                   </h1>
 
                   <div className="flex flex-col gap-4 py-2">
                     <div className="flex items-start gap-2">
-                      <FiMapPin className="w-4.5 h-4.5 mt-1 shrink-0 text-brand-primary" />
+                      <FiMapPin className="w-4.5 h-4.5 mt-1 shrink-0 text-cta-secondary" />
                       <div className="flex flex-col">
                         <h3 className="hidden sm:block font-helvetica uppercase tracking-wider text-text-secondary-1">
                           {t("Location Label")}
                         </h3>
-                        <span className="text-text-primary font-medium">{salon.address}</span>
+                        <span className="text-text-primary font-normal font-helvetica">{salon.address}</span>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2">
-                      <BsTelephone className="w-4.5 h-4.5 mt-1 shrink-0 text-brand-primary" />
+                      <BsTelephone className="w-4.5 h-4.5 mt-1 shrink-0 text-cta-secondary" />
                       <div className="flex flex-col">
                         <h3 className="hidden sm:block font-helvetica uppercase tracking-wider text-text-secondary-1">
                           {t("Phone Number")}
                         </h3>
-                        <span className="text-text-primary font-medium">{salon.phone}</span>
+                        <span className="text-text-primary font-helvetica font-normal">{salon.phone}</span>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2">
-                      <PiGlobeSimpleLight className="w-5 h-5 mt-0.5 shrink-0 text-brand-primary" />
+                      <PiGlobeSimpleLight className="w-5 h-5 mt-0.5 shrink-0 text-cta-secondary" />
                       <div className="flex flex-col">
                         <h3 className="hidden sm:block font-helvetica uppercase tracking-wider text-text-secondary-1">
                           {t("Website")}
@@ -142,7 +142,7 @@ export default function SalonDetailPage() {
                           href={`https://${salon.website}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-text-primary font-medium hover:underline line-clamp-2 break-all cursor-pointer"
+                          className="text-text-primary font-normal font-helvetica hover:underline line-clamp-2 break-all cursor-pointer"
                         >
                           {salon.website}
                         </a>
@@ -151,7 +151,7 @@ export default function SalonDetailPage() {
 
                     <div className="flex items-start gap-2">
                       <Image
-                        src="/clock_brand.svg"
+                        src="/clock_black.svg"
                         width={20}
                         height={20}
                         alt="clock icon"
@@ -251,10 +251,10 @@ function SectionAbout({ salon, t }: { salon: ExtendedSalon; t: TFunction }) {
   if (!salon.description) return null;
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helveticaNeue">
         {t("About Salon")}
       </h3>
-      <div className="prose prose-stone max-w-none text-text-body font-light leading-relaxed text-sm lg:text-base">
+      <div className="prose prose-stone max-w-none text-text-body font-helveticaNeue font-light leading-relaxed text-sm lg:text-base">
         <p>{salon.description}</p>
         <p className="mt-4">{t("About Boilerplate")}</p>
       </div>
@@ -267,10 +267,10 @@ function SectionServices({ salon, t }: { salon: Salon; t: TFunction }) {
   if (services.length === 0) return null;
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helveticaNeue">
         {t("Services")}
       </h3>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 font-helveticaNeue">
         {services.map((service: SalonService, idx: number) => (
           <li key={idx} className="flex items-center gap-3 text-text-body font-light text-sm lg:text-base">
             <span className="w-1 h-1 rounded-full bg-text-primary shrink-0" />
@@ -286,13 +286,15 @@ function SectionBrands({ salon, t }: { salon: Salon; t: TFunction }) {
   const brands = salon.brands || [];
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">{t("Brands")}</h3>
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helveticaNeue">
+        {t("Brands")}
+      </h3>
       <div className="flex flex-wrap gap-3">
         {brands.length > 0 ? (
           brands.map((brand: Brand, idx: number) => (
             <span
               key={idx}
-              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/40 text-text-primary text-sm uppercase tracking-wider font-helvetica font-normal"
+              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/30 rounded-sm text-text-primary text-sm uppercase tracking-wider font-helvetica font-normal"
             >
               {brand.name}
             </span>
@@ -309,10 +311,10 @@ function SectionCertification({ salon, t }: { salon: Salon; t: TFunction }) {
   const certificates = salon.certificates || [];
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">
+      <h3 className="text-2xl uppercase tracking-widest font-light font-helveticaNeue text-text-primary">
         {t("Certifications")}
       </h3>
-      <div className="flex flex-wrap gap-8">
+      <div className="flex flex-wrap gap-8 font-helveticaNeue">
         {certificates.length > 0 ? (
           certificates.map((cert: Certificate, idx: number) => (
             <div key={idx} className="flex items-center gap-3">
@@ -323,7 +325,9 @@ function SectionCertification({ salon, t }: { salon: Salon; t: TFunction }) {
             </div>
           ))
         ) : (
-          <span className="text-text-secondary-1 font-light italic text-sm">{t("Certifications not available")}</span>
+          <span className="text-text-secondary-1 font-light italic text-sm font-helveticaNeue">
+            {t("Certifications not available")}
+          </span>
         )}
       </div>
     </div>
@@ -337,7 +341,9 @@ function SectionReviews({ salon, t }: { salon: Salon; t: TFunction }) {
 
   return (
     <div className="flex flex-col gap-6 mb-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helvetica">{t("Reviews")}</h3>
+      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helveticaNeue">
+        {t("Reviews")}
+      </h3>
       <div className="flex flex-col gap-10">
         {reviews.map((review: SalonReview, idx: number) => {
           const author = review.authorAttribution?.displayName || "Anonymous";
@@ -367,19 +373,23 @@ function SectionReviews({ salon, t }: { salon: Salon; t: TFunction }) {
               <div className="flex-1 flex flex-col gap-3">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="font-medium text-sm text-text-primary uppercase">{author}</p>
+                    <p className=" text-sm text-text-primary uppercase font-helvetica">{author}</p>
                     <div className="flex text-text-primary text-[10px] mt-1 gap-0.5">
                       {[1, 2, 3, 4, 5].map((i) => (
                         <FiStar
                           key={i}
-                          className={`w-3 h-3 ${i <= Math.round(rating) ? "fill-text-primary" : "fill-none text-text-secondary-2"}`}
+                          className={`w-3 h-3 ${i <= Math.round(rating) ? "fill-cta-secondary text-cta-secondary" : "text-cta-secondary/20 fill-cta-secondary/20"}`}
                         />
                       ))}
                     </div>
                   </div>
-                  {date && <span className="text-sm text-text-secondary-1 font-light shrink-0">{date}</span>}
+                  {date && (
+                    <span className="text-sm text-text-secondary-1 font-light shrink-0 font-helveticaNeue">{date}</span>
+                  )}
                 </div>
-                {reviewText && <p className="text-text-body leading-relaxed font-light">{reviewText}</p>}
+                {reviewText && (
+                  <p className="text-text-body leading-relaxed font-light font-helveticaNeue">{reviewText}</p>
+                )}
               </div>
             </div>
           );

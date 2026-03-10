@@ -16,7 +16,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
       {currentPage > 1 && (
         <button
           onClick={() => onPageChange(currentPage - 1)}
-          className="w-10 h-10 border border-border-divider hover:cursor-pointer flex items-center justify-center text-text-primary hover:border-text-primary transition-colors"
+          className="w-10 h-10 border border-cta-bg rounded-sm hover:cursor-pointer flex items-center justify-center text-text-primary hover:border-text-primary transition-colors"
           aria-label="Previous Page"
         >
           <IoChevronBack />
@@ -34,7 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`w-10 h-10 border flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
+              className={`w-10 h-10 border border-cta-bg rounded-sm flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
                     ${
                       currentPage === page
                         ? "border-text-primary text-text-primary"
@@ -52,7 +52,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`w-10 h-10 border flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
+              className={`w-10 h-10 border border-cta-bg rounded-sm flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
                     ${
                       currentPage === page
                         ? "border-text-primary text-text-primary"
@@ -66,7 +66,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
           return (
             <span
               key={page}
-              className="w-10 h-10 flex items-center hover:cursor-pointer justify-center text-text-secondary-1"
+              className="w-10 h-10 flex items-center  hover:cursor-pointer justify-center text-text-secondary-1"
             >
               ...
             </span>
@@ -80,7 +80,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
       {currentPage < totalPages && (
         <button
           onClick={() => onPageChange(currentPage + 1)}
-          className="w-10 h-10 border border-border-divider flex items-center hover:cursor-pointer justify-center text-text-primary hover:border-text-primary transition-colors"
+          className="w-10 h-10 border border-cta-bg rounded-sm flex items-center hover:cursor-pointer justify-center text-text-primary hover:border-text-primary transition-colors"
           aria-label="Next Page"
         >
           <IoChevronForward />

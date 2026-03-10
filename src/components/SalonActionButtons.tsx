@@ -58,7 +58,7 @@ export const SalonActionButtons = ({ salon }: SalonActionButtonsProps) => {
         {/* Reservation Button - Black */}
         <button
           onClick={handleReservationClick}
-          className="bg-cta-bg text-cta-text h-10 flex items-center justify-center gap-2 font-medium hover:opacity-90 transition-opacity hover:cursor-pointer hover:bg-brand-primary duration-300  uppercase tracking-wider text-sm px-1"
+          className="bg-cta-bg text-cta-text rounded-sm h-10 flex items-center justify-center gap-2 font-medium hover:opacity-90 transition-opacity hover:cursor-pointer hover:bg-brand-primary duration-300  uppercase tracking-wider text-sm px-1"
         >
           <FiCalendar className="w-3.5 h-3.5" />
           <span className="">{t("Reservation")}</span>
@@ -67,7 +67,7 @@ export const SalonActionButtons = ({ salon }: SalonActionButtonsProps) => {
         {/* Call Button - White */}
         <a
           href={`tel:${salon.phone}`}
-          className="bg-background-primary border border-border-divider text-text-primary h-10 flex items-center justify-center gap-2 font-medium hover:bg-background-secondary transition-colors  uppercase tracking-wider text-sm px-1"
+          className="bg-background-primary rounded-sm border border-bta-bg text-text-primary h-10 flex items-center justify-center gap-2 font-medium hover:bg-background-secondary transition-colors  uppercase tracking-wider text-sm px-1"
         >
           <FiPhone className="w-3.5 h-3.5" />
           <span className="">{t("Call")}</span>
@@ -76,7 +76,7 @@ export const SalonActionButtons = ({ salon }: SalonActionButtonsProps) => {
         {/* Web Button - White */}
         <button
           onClick={() => handleWebsiteClick(salon.website)}
-          className="bg-background-primary border border-border-divider text-text-primary h-10 flex items-center justify-center gap-2 font-medium hover:bg-background-secondary transition-colors hover:cursor-pointer  uppercase tracking-wider text-sm px-1"
+          className="bg-background-primary rounded-sm border border-bta-bg text-text-primary h-10 flex items-center justify-center gap-2 font-medium hover:bg-background-secondary transition-colors hover:cursor-pointer  uppercase tracking-wider text-sm px-1"
         >
           <FiGlobe className="w-3.5 h-3.5" />
           <span className="">{t("Web")}</span>
@@ -85,7 +85,7 @@ export const SalonActionButtons = ({ salon }: SalonActionButtonsProps) => {
         {/* Share Button - White */}
         <button
           onClick={() => setShowShareDialog(true)}
-          className="bg-background-primary border border-border-divider text-text-primary h-10 flex items-center justify-center gap-2 font-medium hover:bg-background-secondary transition-colors hover:cursor-pointer uppercase tracking-wider text-sm px-1"
+          className="bg-background-primary rounded-sm border border-bta-bg text-text-primary h-10 flex items-center justify-center gap-2 font-medium hover:bg-background-secondary transition-colors hover:cursor-pointer uppercase tracking-wider text-sm px-1"
         >
           <FiShare className="w-3.5 h-3.5" />
           <span className="">{t("Share")}</span>

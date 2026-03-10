@@ -214,11 +214,11 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (rating >= i) {
-        stars.push(<IoStar key={i} className="w-3.5 h-3.5 text-text-primary" />);
+        stars.push(<IoStar key={i} className="w-3.5 h-3.5 text-cta-secondary" />);
       } else if (rating >= i - 0.5) {
-        stars.push(<IoStarHalf key={i} className="w-3.5 h-3.5 text-text-primary" />);
+        stars.push(<IoStarHalf key={i} className="w-3.5 h-3.5 text-cta-secondary" />);
       } else {
-        stars.push(<IoStarOutline key={i} className="w-3.5 h-3.5 text-text-primary" />);
+        stars.push(<IoStarOutline key={i} className="w-3.5 h-3.5 text-cta-secondary" />);
       }
     }
     return stars;
@@ -264,9 +264,9 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-3">
                 <div className="w-4.5 h-4.5 shrink-0 flex items-center justify-center">
-                  <FiMapPin className="w-5 h-5 text-brand-primary mt-1" />
+                  <FiMapPin className="w-5 h-5 text-cta-secondary mt-1" />
                 </div>
-                <h4 className="font-helvetica  text-text-placeholder/90">{t("Location Label")}</h4>
+                <h4 className="font-helvetica  text-text-placeholder/90 font-light">{t("Location Label")}</h4>
               </div>
               <div className="pl-8 font-helvetica text-base text-text-primary leading-normal">
                 {(() => {
@@ -294,20 +294,20 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-3">
                 <div className="w-4.5 h-4.5 shrink-0 flex items-center justify-center">
-                  <BsTelephone className="w-5 h-5 text-brand-primary mt-1" />
+                  <BsTelephone className="w-5 h-5 text-cta-secondary mt-1" />
                 </div>
-                <h4 className="font-helvetica text-text-placeholder/90">{t("Phone Number")}</h4>
+                <h4 className="font-helvetica text-text-placeholder/90 font-light">{t("Phone Number")}</h4>
               </div>
               <div className="pl-8">
                 {salon.phone ? (
                   <a
                     href={`tel:${salon.phone}`}
-                    className="font-geist text-base text-text-primary hover:underline hover:text-brand-primary transition-colors"
+                    className="font-helvetica text-base text-text-primary hover:underline hover:text-brand-primary transition-colors"
                   >
                     {salon.phone}
                   </a>
                 ) : (
-                  <span className="font-geist text-base text-text-secondary-1">{t("Not available")}</span>
+                  <span className="font-helvetica text-base text-text-secondary-1 ">{t("Not available")}</span>
                 )}
               </div>
             </div>
@@ -316,9 +316,9 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-3">
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
-                  <PiGlobeSimpleLight className="w-5 h-5 text-brand-primary mt-0.5" />
+                  <PiGlobeSimpleLight className="w-5 h-5 text-cta-secondary mt-0.5" />
                 </div>
-                <h4 className="font-helvetica text-text-placeholder/90">{t("Website")}</h4>
+                <h4 className="font-helvetica text-text-placeholder/90 font-light">{t("Website")}</h4>
               </div>
               <div className="pl-8">
                 {salon.website ? (
@@ -326,12 +326,12 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
                     href={`https://${salon.website}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-geist text-base text-text-primary hover:underline hover:text-brand-primary transition-colors block break-all"
+                    className="font-helvetica text-base text-text-primary hover:underline hover:text-brand-primary transition-colors block break-all"
                   >
                     {salon.website}
                   </a>
                 ) : (
-                  <span className="font-geist text-base text-text-secondary-1">{t("Not available")}</span>
+                  <span className="font-helvetica text-base text-text-secondary-1">{t("Not available")}</span>
                 )}
               </div>
             </div>
@@ -340,14 +340,14 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-3">
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
-                  <Image src="/clock_brand.svg" width={20} height={20} alt="clock icon" className="w-5 h-5 mt-0.5" />
+                  <Image src="/clock_black.svg" width={20} height={20} alt="clock icon" className="w-5 h-5 mt-0.5" />
                 </div>
                 <h4 className="font-helvetica text-text-placeholder/90">{t("Opening Hours")}</h4>
               </div>
               <div className="pl-8 flex items-center gap-2 cursor-pointer group">
                 <span
                   className={clsx(
-                    "font-geist text-base font-medium",
+                    "font-helvetica text-base font-medium",
                     status === t("Open")
                       ? "text-success"
                       : status === t("Timing not available")
@@ -360,7 +360,9 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
                 {nextTime && (
                   <>
                     <span className="text-text-secondary-1">•</span>
-                    <span className="font-geist font-light text-sm text-text-primary leading-normal">{nextTime}</span>
+                    <span className="font-helvetica font-light text-sm text-text-primary leading-normal">
+                      {nextTime}
+                    </span>
                   </>
                 )}
                 <IoChevronDown className="w-4 h-4 text-text-primary" />
@@ -375,7 +377,7 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             {/* Booking - Primary */}
             <button
               onClick={handleBooking}
-              className="flex-1 h-full bg-cta-bg text-cta-text hover:bg-brand-primary duration-300 hover:cursor-pointer flex items-center justify-center rounded-xs hover:opacity-90 transition-opacity"
+              className="flex-1 h-full rounded-sm bg-cta-bg text-cta-text hover:bg-brand-primary duration-300 hover:cursor-pointer flex items-center justify-center  hover:opacity-90 transition-opacity"
             >
               <IoCalendarOutline className="w-6 h-6" />
             </button>
@@ -383,7 +385,7 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             {/* View - Secondary */}
             <button
               onClick={handleViewDetails}
-              className="flex-1 h-full bg-background-primary hover:cursor-pointer border border-border-divider text-text-primary flex items-center justify-center rounded-xs hover:bg-background-secondary transition-colors"
+              className="flex-1 h-full rounded-sm bg-background-primary hover:cursor-pointer border border-cta-bg text-text-primary flex items-center justify-center hover:bg-background-secondary transition-colors"
             >
               <IoEyeOutline className="w-6 h-6" />
             </button>
@@ -391,7 +393,7 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             {/* Navigate - Secondary */}
             <button
               onClick={handleNavigate}
-              className="flex-1 h-full bg-background-primary hover:cursor-pointer border border-border-divider text-text-primary flex items-center justify-center rounded-xs hover:bg-background-secondary transition-colors"
+              className="flex-1 h-full rounded-sm bg-background-primary hover:cursor-pointer border border-cta-bg text-text-primary flex items-center justify-center hover:bg-background-secondary transition-colors"
             >
               <IoNavigateOutline className="w-6 h-6" />
             </button>
@@ -399,7 +401,7 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
             {/* Share - Secondary */}
             <button
               onClick={handleShare}
-              className="flex-1 h-full bg-background-primary hover:cursor-pointer border border-border-divider text-text-primary flex items-center justify-center rounded-xs hover:bg-background-secondary transition-colors"
+              className="flex-1 h-full rounded-sm bg-background-primary hover:cursor-pointer border border-cta-bg text-text-primary flex items-center justify-center hover:bg-background-secondary transition-colors"
             >
               <IoShareSocialOutline className="w-6 h-6" />
             </button>
@@ -523,6 +525,23 @@ export const MapSection = ({ salons }: MapSectionProps) => {
                             : "bg-background-primary hover:bg-background-secondary/50",
                         )}
                       >
+                        {/* Brands */}
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          {salon.brands?.slice(0, 3).map((brand, i) => (
+                            <span
+                              key={i}
+                              className="px-2 py-1 bg-brand-primary/10 rounded-sm border border-brand-primary/40 text-primary text-xs font-helvetica uppercase"
+                            >
+                              {typeof brand === "string" ? brand : brand.name}
+                            </span>
+                          ))}
+                          {salon.brands && salon.brands.length > 3 && (
+                            <span className="text-xs text-text-secondary-2 mt-1 rounded-sm">
+                              +{salon.brands.length - 3}
+                            </span>
+                          )}
+                        </div>
+
                         <h3
                           className={clsx(
                             "font-helvetica text-base mb-1 text-text-primary",
@@ -531,24 +550,9 @@ export const MapSection = ({ salons }: MapSectionProps) => {
                         >
                           {salon.name}
                         </h3>
-                        <p className="font-geist font-light text-base text-text-primary-1 mb-3 truncate">
+                        <p className="font-helvetica font-light text-base text-text-primary-1 mb-3 truncate">
                           {salon.address}
                         </p>
-
-                        {/* Brands */}
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {salon.brands?.slice(0, 3).map((brand, i) => (
-                            <span
-                              key={i}
-                              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/40 text-primary text-xs font-helvetica uppercase"
-                            >
-                              {typeof brand === "string" ? brand : brand.name}
-                            </span>
-                          ))}
-                          {salon.brands && salon.brands.length > 3 && (
-                            <span className="text-xs text-text-secondary-2 mt-1">+{salon.brands.length - 3}</span>
-                          )}
-                        </div>
 
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
@@ -583,7 +587,7 @@ export const MapSection = ({ salons }: MapSectionProps) => {
                             {nextTime && (
                               <>
                                 <span className="text-text-secondary-2">•</span>
-                                <span className="font-geist font-light text-sm text-text-primary">{nextTime}</span>
+                                <span className="font-helvetica font-light text-sm text-text-primary">{nextTime}</span>
                               </>
                             )}
                           </div>

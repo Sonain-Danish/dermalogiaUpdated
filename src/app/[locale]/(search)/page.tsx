@@ -104,7 +104,7 @@ export default function Home() {
       {currentSalons.length < total && limit < total && (
         <div className="flex justify-center mt-12">
           <button
-            className="font-helvetica font-medium text-base border tracking-[1px] border-text-primary text-text-primary px-20 py-3 uppercase hover:bg-text-primary hover:text-background-primary transition-colors cursor-pointer"
+            className="font-helvetica font-bold text-base bg-brand-primary rounded-sm tracking-[1px]  text-cta-text px-20 py-3 uppercase hover:bg-text-primary hover:text-background-primary transition-colors cursor-pointer"
             onClick={handleLoadMore}
           >
             {t("LOAD MORE")}

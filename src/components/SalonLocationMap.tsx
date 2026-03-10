@@ -200,18 +200,18 @@ export const SalonLocationMap = ({ salon, className }: { salon: Salon; className
 
       <div className="p-6 flex flex-col gap-4">
         <div className="flex items-start gap-4">
-          <div className="text-brand-primary flex items-center justify-center shrink-0 mt-1">
+          <div className="text-cta-secondary flex items-center justify-center shrink-0 mt-1">
             <FiMapPin className="w-6 h-6" />
           </div>
           <div className="flex flex-col gap-1 font-helvetica">
-            <span className="text-text-secondary-1">{t("Location Label")}</span>
-            <span className="text-text-primary font-medium leading-tight">{salon.address}</span>
+            <span className="text-text-secondary-1 font-light">{t("Location Label")}</span>
+            <span className="text-text-primary leading-tight">{salon.address}</span>
           </div>
         </div>
 
         <button
           onClick={handleNavigate}
-          className="w-full bg-cta-bg text-cta-text h-10 flex hover:cursor-pointer items-center justify-center gap-3 font-medium hover:opacity-90 transition-opacity uppercase tracking-widest"
+          className="w-full bg-cta-bg text-cta-text rounded-sm h-10 flex hover:cursor-pointer items-center justify-center gap-3 font-medium hover:opacity-90 transition-opacity uppercase tracking-widest"
         >
           <FiNavigation className="w-5 h-5" />
           {t("Navigate")}
