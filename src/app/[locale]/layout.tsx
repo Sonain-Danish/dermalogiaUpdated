@@ -149,7 +149,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}  ${helveticaNeue.variable} ${helvetica.variable} antialiased bg-background-primary text-text-primary`}
       >
         <HeightProvider>
-          <NextTopLoader color="#AA8232" showSpinner={false} />
+          <NextTopLoader color="#5B6770" showSpinner={false} />
           <ReactQueryProvider>
             <Suspense fallback={null}>
               <FilterProvider>
