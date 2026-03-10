@@ -93,7 +93,7 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
         className="flex flex-col gap-3 cursor-pointer w-full"
       >
         {/* Image Container */}
-        <div className="relative w-full aspect-424/298 bg-gray-100 overflow-hidden rounded-lgw">
+        <div className="relative w-full aspect-424/298 bg-gray-100 overflow-hidden rounded-lg">
           <Image
             src={imgSrc}
             onError={() => setImgSrc("/assets/default_salon_image.png")}
