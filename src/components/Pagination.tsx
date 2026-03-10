@@ -34,7 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`w-10 h-10 border flex items-center hover:cursor-pointer justify-center font-arpona text-sm transition-colors
+              className={`w-10 h-10 border flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
                     ${
                       currentPage === page
                         ? "border-text-primary text-text-primary"
@@ -52,7 +52,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`w-10 h-10 border flex items-center hover:cursor-pointer justify-center font-arpona text-sm transition-colors
+              className={`w-10 h-10 border flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
                     ${
                       currentPage === page
                         ? "border-text-primary text-text-primary"

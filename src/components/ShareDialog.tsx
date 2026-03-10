@@ -64,14 +64,10 @@ export const ShareDialog = ({ salon, isOpen, onClose, url: overrideUrl }: ShareD
         </button>
 
         {/* Header */}
-        <h3 className="font-arpona uppercase tracking-widest text-lg text-text-primary mb-4">
-          {t("Share Salon")}
-        </h3>
+        <h3 className="font-helvetica uppercase tracking-widest text-lg text-text-primary mb-4">{t("Share Salon")}</h3>
 
         {/* Subtext */}
-        <p className="text-text-secondary-1 font-light text-sm mb-6 leading-relaxed">
-          {t("Share Subtitle")}
-        </p>
+        <p className="text-text-secondary-1 font-light text-sm mb-6 leading-relaxed">{t("Share Subtitle")}</p>
 
         {/* URL Input */}
         <div className="flex items-center gap-3 border border-border-divider p-3 mb-6 bg-background-primary">

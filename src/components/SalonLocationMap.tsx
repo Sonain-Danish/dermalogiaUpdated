@@ -203,7 +203,7 @@ export const SalonLocationMap = ({ salon, className }: { salon: Salon; className
           <div className="text-brand-primary flex items-center justify-center shrink-0 mt-1">
             <FiMapPin className="w-6 h-6" />
           </div>
-          <div className="flex flex-col gap-1 font-arpona">
+          <div className="flex flex-col gap-1 font-helvetica">
             <span className="text-text-secondary-1">{t("Location Label")}</span>
             <span className="text-text-primary font-medium leading-tight">{salon.address}</span>
           </div>

@@ -20,7 +20,7 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
   const { resolvedTheme } = useTheme();
   const currentLocale = i18n.language;
   const [showDetails, setShowDetails] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const timingRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +35,10 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
   // Helper to render stars based on rating
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, i) => (
-      <IoStar key={i} className={clsx("w-3 h-3", i < Math.round(rating) ? "text-text-primary" : "text-text-secondary-2")} />
+      <IoStar
+        key={i}
+        className={clsx("w-3 h-3", i < Math.round(rating) ? "text-cta-secondary" : "text-cta-secondary/30")}
+      />
     ));
   };
 
@@ -90,7 +93,7 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
         className="flex flex-col gap-3 cursor-pointer w-full"
       >
         {/* Image Container */}
-        <div className="relative w-full aspect-424/298 bg-gray-100 overflow-hidden">
+        <div className="relative w-full aspect-424/298 bg-gray-100 overflow-hidden rounded-lgw">
           <Image
             src={imgSrc}
             onError={() => setImgSrc("/assets/default_salon_image.png")}
@@ -100,9 +103,9 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
           />
 
           {/* Rating Badge (Top Left) */}
-          <div className="absolute top-4 left-4 bg-background-primary/95 backdrop-blur-sm px-3 py-1.5 flex items-center gap-2 shadow-sm">
+          <div className="absolute top-4 left-4 bg-background-primary/95 backdrop-blur-sm rounded-sm px-3 py-1.5 flex items-center gap-2 shadow-sm">
             <div className="flex items-center gap-0.5">{renderStars(salon.rating ? salon.rating : 0)}</div>
-            <span className="font-geist text-xs text-text-primary font-medium">
+            <span className="font-helvetica text-xs text-text-primary font-medium">
               {salon.ratingCount} {t("reviews")}
             </span>
           </div>
@@ -116,13 +119,13 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
               {salon.brands.slice(0, 3).map((brand, index) => (
                 <span
                   key={index}
-                  className="px-2 py-0.5 border border-brand-primary/30 text-sm font-arpona uppercase tracking-wider text-text-primary group-hover:text-brand-primary bg-brand-primary/10 whitespace-nowrap transition-colors duration-300"
+                  className="px-2 py-0.5 border border-brand-primary/30 rounded-sm text-sm font-helvetica uppercase tracking-wider text-text-primary group-hover:text-brand-primary bg-brand-primary/10 whitespace-nowrap transition-colors duration-300"
                 >
                   {typeof brand === "string" ? brand : brand.name}
                 </span>
               ))}
               {salon.brands.length > 3 && (
-                <span className="px-2 py-0.5 border border-brand-primary/30 text-sm font-arpona uppercase tracking-wider text-text-secondary-1 group-hover:text-brand-primary bg-brand-primary/10 whitespace-nowrap transition-colors duration-300">
+                <span className="px-2 py-0.5 border border-brand-primary/30 rounded-sm text-sm font-helvetica uppercase tracking-wider text-text-secondary-1 group-hover:text-brand-primary bg-brand-primary/10 whitespace-nowrap transition-colors duration-300">
                   +{salon.brands.length - 3}
                 </span>
               )}
@@ -130,12 +133,12 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
           )}
 
           {/* Name */}
-          <h3 className="font-arpona text-base text-text-primary leading-tight group-hover:underline decoration-1 underline-offset-4 truncate">
+          <h3 className="font-helvetica text-base text-text-primary leading-tight group-hover:underline decoration-1 underline-offset-4 truncate">
             {salon.name}
           </h3>
 
           {/* Address */}
-          <div className="font-geist font-light text-base text-text-primary truncate w-full">{salon.address}</div>
+          <div className="font-helvetica font-light text-base text-text-primary truncate w-full">{salon.address}</div>
 
           {/* Status & Time */}
           <div className="relative flex items-center gap-2 mt-1 text-sm z-20">
@@ -149,7 +152,7 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
 
             <button
               onClick={handleTimingClick}
-              className={`font-medium hover:underline font-arpona text-base text-left ${
+              className={`font-medium hover:underline font-helvetica text-base text-left ${
                 status === t("Open")
                   ? "text-success"
                   : status === t("Timing not available")

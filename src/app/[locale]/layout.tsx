@@ -12,35 +12,107 @@ import { Toaster } from "react-hot-toast";
 import "../globals.css";
 import initTranslations from "../i18n";
 
-const arpona = localFont({
+// const arpona = localFont({
+//   src: [
+//     {
+//       path: "../fonts/ArponaLight.woff2",
+//       weight: "300",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ArponaRegular.woff2",
+//       weight: "400",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ArponaMedium.woff2",
+//       weight: "500",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ArponaSemoBold.woff2",
+//       weight: "600",
+//       style: "normal",
+//     },
+//     {
+//       path: "../fonts/ArponaBold.woff2",
+//       weight: "700",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-arpona",
+// });
+
+const helvetica = localFont({
   src: [
     {
-      path: "../fonts/ArponaLight.woff2",
+      path: "../fonts/helvetica/helvetica-light.ttf",
       weight: "300",
       style: "normal",
     },
     {
-      path: "../fonts/ArponaRegular.woff2",
+      path: "../fonts/helvetica/Helvetica.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../fonts/ArponaMedium.woff2",
+      path: "../fonts/helvetica/Helvetica-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/helvetica/helvetica-compressed.otf",
+      weight: "800",
+      style: "normal",
+    },
+  ],
+  variable: "--font-helvetica",
+});
+
+const helveticaNeue = localFont({
+  src: [
+    {
+      path: "../fonts/helvetica_Neue/HelveticaNeueUltraLight.otf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../fonts/helvetica_Neue/HelveticaNeueThin.otf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../fonts/helvetica_Neue/HelveticaNeueLight.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../fonts/helvetica_Neue/HelveticaNeueRoman.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/helvetica_Neue/HelveticaNeueMedium.otf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../fonts/ArponaSemoBold.woff2",
+      path: "../fonts/helvetica_Neue/HelveticaNeueBold.otf",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../fonts/ArponaBold.woff2",
+      path: "../fonts/helvetica_Neue/HelveticaNeueHeavy.otf",
       weight: "700",
       style: "normal",
     },
+    {
+      path: "../fonts/helvetica_Neue/HelveticaNeueBlack.otf",
+      weight: "800",
+      style: "normal",
+    },
   ],
-  variable: "--font-arpona",
+  variable: "--font-helveticaNeue",
 });
 
 const geistSans = Geist({
@@ -74,7 +146,7 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <body
         suppressHydrationWarning={true}
-        className={`${geistSans.variable} ${geistMono.variable} ${arpona.variable} antialiased bg-background-primary text-text-primary`}
+        className={`${geistSans.variable} ${geistMono.variable}  ${helveticaNeue.variable} ${helvetica.variable} antialiased bg-background-primary text-text-primary`}
       >
         <HeightProvider>
           <NextTopLoader color="#AA8232" showSpinner={false} />

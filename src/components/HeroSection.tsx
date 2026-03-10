@@ -23,7 +23,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="whitespace-pre-wrap font-arpona font-medium text-[32px] md:text-[40px] leading-tight text-white uppercase mb-3 md:mb-4 max-w-3xl px-2 text-center"
+            className="whitespace-pre-wrap font-helvetica font-medium text-[32px] md:text-[40px] leading-tight text-white uppercase mb-3 md:mb-4 max-w-3xl px-2 text-center"
           >
             {t("FIND A VERIFIED\nSALON NEAR YOU")}
           </motion.h1>
@@ -40,7 +40,11 @@ export const HeroSection = () => {
 
         {/* Search Bar - overlapping bottom */}
         <div className="absolute -bottom-45 md:-bottom-32 w-full px-4 z-9999">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <MapFilterBar />
           </motion.div>
         </div>

@@ -64,12 +64,12 @@ export default function Home() {
     <section className="container mx-auto px-4 mt-34 md:mt-30 mb-20">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 md:mb-10">
-        <h2 className="font-arpona text-2xl md:text-[32px] font-light uppercase text-text-primary">
+        <h2 className="font-helvetica text-2xl md:text-[32px] font-light uppercase text-text-primary">
           {t("Partner Salons")}
         </h2>
         <button
           onClick={handleShowMap}
-          className="flex items-center  gap-2 text-text-primary font-arpona uppercase text-sm md:text-base group cursor-pointer hover:text-brand-primary hover:border-b-brand-primary duration-300 border-b border-text-primary pb-0.5"
+          className="flex items-center  gap-2 text-text-primary font-helvetica uppercase text-sm md:text-base group cursor-pointer hover:text-brand-primary hover:border-b-brand-primary duration-300 border-b border-text-primary pb-0.5"
         >
           {t("Show Map")}
           <IoChevronForward className="group-hover:translate-x-1 transition-transform" />
@@ -97,16 +97,14 @@ export default function Home() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 text-text-secondary-1 font-arpona">
-          {t("No Salons Found!")}
-        </div>
+        <div className="text-center py-20 text-text-secondary-1 font-helvetica">{t("No Salons Found!")}</div>
       )}
 
       {/* Load More */}
       {currentSalons.length < total && limit < total && (
         <div className="flex justify-center mt-12">
           <button
-            className="font-arpona font-medium text-base border tracking-[1px] border-text-primary text-text-primary px-20 py-3 uppercase hover:bg-text-primary hover:text-background-primary transition-colors cursor-pointer"
+            className="font-helvetica font-medium text-base border tracking-[1px] border-text-primary text-text-primary px-20 py-3 uppercase hover:bg-text-primary hover:text-background-primary transition-colors cursor-pointer"
             onClick={handleLoadMore}
           >
             {t("LOAD MORE")}
@@ -114,7 +112,9 @@ export default function Home() {
         </div>
       )}
 
-      {currentTotalPages > 1 && <Pagination currentPage={page} totalPages={currentTotalPages} onPageChange={handlePageChange} />}
+      {currentTotalPages > 1 && (
+        <Pagination currentPage={page} totalPages={currentTotalPages} onPageChange={handlePageChange} />
+      )}
     </section>
   );
 }

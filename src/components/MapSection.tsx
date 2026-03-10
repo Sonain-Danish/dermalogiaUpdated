@@ -154,7 +154,13 @@ const MAP_STYLES = [
   {
     featureType: "road.arterial",
     elementType: "labels.icon",
-    stylers: [{ invert_lightness: true }, { saturation: "-7" }, { lightness: "3" }, { gamma: "1.80" }, { weight: "0.01" }],
+    stylers: [
+      { invert_lightness: true },
+      { saturation: "-7" },
+      { lightness: "3" },
+      { gamma: "1.80" },
+      { weight: "0.01" },
+    ],
   },
   {
     featureType: "transit",
@@ -228,13 +234,13 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
               <IoArrowBack className="w-6 h-6" />
             </button>
             <div className="flex-1">
-              <h2 className="font-arpona text-text-primary leading-tight">{salon.name}</h2>
+              <h2 className="font-helvetica text-text-primary leading-tight">{salon.name}</h2>
             </div>
           </div>
           <div className="pl-9 flex items-center gap-1.5 mb-4">
             <div className="flex">{renderStars(salon.rating || 0)}</div>
-            <span className="font-arpona text-sm font-medium text-text-primary">{salon.rating ?? 0}</span>
-            <span className="text-text-secondary-2 text-sm font-geist font-light">
+            <span className="font-helvetica text-sm font-medium text-text-primary">{salon.rating ?? 0}</span>
+            <span className="text-text-secondary-2 text-sm font-helvetica font-light">
               ({salon.ratingCount || 0} {t("reviews")})
             </span>
           </div>
@@ -260,9 +266,9 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
                 <div className="w-4.5 h-4.5 shrink-0 flex items-center justify-center">
                   <FiMapPin className="w-5 h-5 text-brand-primary mt-1" />
                 </div>
-                <h4 className="font-arpona  text-text-placeholder/90">{t("Location Label")}</h4>
+                <h4 className="font-helvetica  text-text-placeholder/90">{t("Location Label")}</h4>
               </div>
-              <div className="pl-8 font-geist text-base text-text-primary leading-normal">
+              <div className="pl-8 font-helvetica text-base text-text-primary leading-normal">
                 {(() => {
                   const address = salon.address || "";
                   // Regex for Czech/Slovak postcodes (e.g., 671 75 or 763 61)
@@ -290,7 +296,7 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
                 <div className="w-4.5 h-4.5 shrink-0 flex items-center justify-center">
                   <BsTelephone className="w-5 h-5 text-brand-primary mt-1" />
                 </div>
-                <h4 className="font-arpona text-text-placeholder/90">{t("Phone Number")}</h4>
+                <h4 className="font-helvetica text-text-placeholder/90">{t("Phone Number")}</h4>
               </div>
               <div className="pl-8">
                 {salon.phone ? (
@@ -312,7 +318,7 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
                   <PiGlobeSimpleLight className="w-5 h-5 text-brand-primary mt-0.5" />
                 </div>
-                <h4 className="font-arpona text-text-placeholder/90">{t("Website")}</h4>
+                <h4 className="font-helvetica text-text-placeholder/90">{t("Website")}</h4>
               </div>
               <div className="pl-8">
                 {salon.website ? (
@@ -336,7 +342,7 @@ const SalonDetail = ({ salon, onBack }: { salon: Salon; onBack: () => void }) =>
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
                   <Image src="/clock_brand.svg" width={20} height={20} alt="clock icon" className="w-5 h-5 mt-0.5" />
                 </div>
-                <h4 className="font-arpona text-text-placeholder/90">{t("Opening Hours")}</h4>
+                <h4 className="font-helvetica text-text-placeholder/90">{t("Opening Hours")}</h4>
               </div>
               <div className="pl-8 flex items-center gap-2 cursor-pointer group">
                 <span
@@ -500,7 +506,7 @@ export const MapSection = ({ salons }: MapSectionProps) => {
             <div className="flex-1 overflow-y-auto py-4 space-y-3 custom-scrollbar">
               {salons.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-10">
-                  <div className="text-error font-arpona text-xl mb-2">{t("No Salons Found!")}</div>
+                  <div className="text-error font-helvetica text-xl mb-2">{t("No Salons Found!")}</div>
                   <p className="text-text-secondary-1 text-sm">{t("No suggestions")}</p>
                 </div>
               ) : (
@@ -519,20 +525,22 @@ export const MapSection = ({ salons }: MapSectionProps) => {
                       >
                         <h3
                           className={clsx(
-                            "font-arpona text-base mb-1 text-text-primary",
+                            "font-helvetica text-base mb-1 text-text-primary",
                             selectedSalonId === salon.id ? "font-medium" : "font-normal",
                           )}
                         >
                           {salon.name}
                         </h3>
-                        <p className="font-geist font-light text-base text-text-primary-1 mb-3 truncate">{salon.address}</p>
+                        <p className="font-geist font-light text-base text-text-primary-1 mb-3 truncate">
+                          {salon.address}
+                        </p>
 
                         {/* Brands */}
                         <div className="flex flex-wrap gap-2 mb-3">
                           {salon.brands?.slice(0, 3).map((brand, i) => (
                             <span
                               key={i}
-                              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/40 text-primary text-xs font-arpona uppercase"
+                              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/40 text-primary text-xs font-helvetica uppercase"
                             >
                               {typeof brand === "string" ? brand : brand.name}
                             </span>
@@ -553,12 +561,16 @@ export const MapSection = ({ salons }: MapSectionProps) => {
                             />
                             <span
                               className={clsx(
-                                status === t("Open") ? "bg-success" : status === t("Timing not available") ? "" : "bg-error",
+                                status === t("Open")
+                                  ? "bg-success"
+                                  : status === t("Timing not available")
+                                    ? ""
+                                    : "bg-error",
                               )}
                             />
                             <span
                               className={clsx(
-                                "font-arpona ",
+                                "font-helvetica ",
                                 status === t("Open")
                                   ? "text-success-text"
                                   : status === t("Timing not available")
