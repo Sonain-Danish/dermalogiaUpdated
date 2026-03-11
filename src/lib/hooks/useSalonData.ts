@@ -14,6 +14,7 @@ export const useSalonsData = () => {
     queryKey: ["salons"],
     queryFn: async (): Promise<Salon[]> => {
       const response = await fetch(`${API_BASE_URL}/api/salons?salonType=SALON_ONLINE`);
+      // const response = await fetch(`${API_BASE_URL}/api/salons/dermalogica`);
       if (!response.ok) {
         throw new Error("Failed to fetch salons");
       }
