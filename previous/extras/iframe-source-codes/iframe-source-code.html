@@ -1,0 +1,176 @@
+<style>
+  <!--
+  <span id="_mce_caret" data-mce-bogus="1"><strong data-mce-bogus="1"></strong></span>
+          /* Your styles remain the same */
+          h1 {
+            text-align: center;
+          }
+          .lokator-wrapper {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+          }
+          iframe {
+            width: 100%;
+            min-height: 1800px;
+            border: none;
+            display: block;
+            margin: 0 auto;
+          }
+  -->
+</style>
+<div class="lokator-wrapper">
+  <!-- The initial src can be blank or a placeholder, as it will be set by JS -->
+  <iframe
+    width="400"
+    height="150"
+    id="lokatorFrame"
+    src="about:blank"
+    loading="lazy"
+    scrolling="no"
+    allow="geolocation; clipboard-write"
+  ></iframe>
+</div>
+<p>
+  <script>
+    // --- SETUP ---
+    const iframe = document.getElementById("lokatorFrame");
+    const baseUrl = "https://salonz.shop"; // always base origin
+    const defaultQuery = ""; // e.g "brand=Zenz+Organic"
+
+    function getLocale() {
+      const m = window.location.pathname.match(/^\/([a-z]{2})\//);
+      return m ? m[1] : "cs";
+    }
+
+    // Build URL with optional defaultQuery
+    function buildUrl({ withDefaultQuery = false, withTheme = true } = {}) {
+      const u = new URL(`${baseUrl}/${getLocale()}/location-list`);
+
+      // Priority 1: Copy parent URL params
+      const parentQuery = window.location.search.substring(1);
+      if (parentQuery) {
+        u.search = `?${parentQuery}`;
+      }
+      // Priority 2: Use defaultQuery only if no parent params
+      else if (withDefaultQuery && defaultQuery) {
+        // append defaultQuery literally (avoid re-encoding +)
+        u.search = u.search ? `${u.search}&${defaultQuery}` : `?${defaultQuery}`;
+      }
+
+      // Add/update theme
+      if (withTheme) {
+        const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        const usp = new URLSearchParams(u.search);
+        usp.set("theme", theme);
+        u.search = `?${usp.toString()}`;
+      }
+
+      return u.href;
+    }
+
+    // --- FIRST LOAD: set src exactly once with defaultQuery+theme ---
+    let firstUrlSet = false;
+    function initIframeOnce() {
+      if (firstUrlSet) return;
+      firstUrlSet = true;
+      const url = buildUrl({ withDefaultQuery: true, withTheme: true });
+      console.log("Initial iframe URL ->", url);
+      iframe.src = url;
+    }
+
+    // --- SAFETY NET: if something later overwrites src without your query, put it back ONCE ---
+    let reappliedDefaultOnce = false;
+
+    function hasAllDefaultParams(u) {
+      if (!defaultQuery) return true;
+      const want = new URLSearchParams(defaultQuery);
+      for (const [k, v] of want) {
+        // only require presence+value for keys we set
+        if (u.searchParams.get(k) !== v) return false;
+      }
+      return true;
+    }
+
+    function reapplyDefaultQueryOnceIfMissing() {
+      if (reappliedDefaultOnce || !defaultQuery) return;
+      try {
+        const u = new URL(iframe.getAttribute("src") || `${baseUrl}/${getLocale()}/location-list`);
+        if (!hasAllDefaultParams(u)) {
+          // re-apply only missing default params
+          const want = new URLSearchParams(defaultQuery);
+          want.forEach((v, k) => {
+            if (!u.searchParams.has(k)) u.searchParams.set(k, v);
+          });
+          // keep current theme if present, otherwise add it
+          const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+          if (u.searchParams.get("theme") !== theme) u.searchParams.set("theme", theme);
+
+          reappliedDefaultOnce = true;
+          const fixed = u.href;
+          console.log("Re-applied defaultQuery once ->", fixed);
+          iframe.setAttribute("src", fixed);
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    // Watch ONLY the iframe's src attribute; if something changes it, verify once.
+    const iframeAttrObserver = new MutationObserver((muts) => {
+      for (const m of muts) {
+        if (m.type === "attributes" && m.attributeName === "src") {
+          // Defer a tick so if another script sets then immediately sets again, we check the final value.
+          setTimeout(reapplyDefaultQueryOnceIfMissing, 0);
+        }
+      }
+    });
+    iframeAttrObserver.observe(iframe, { attributes: true, attributeFilter: ["src"] });
+
+    // --- THEME CHANGES (unchanged logic for later toggles) ---
+    function updateIframeThemeLater() {
+      if (!iframe.src || iframe.src === "about:blank") return;
+      const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+      const u = new URL(iframe.src);
+      const cur = u.searchParams.get("theme");
+      if (cur !== theme) {
+        u.searchParams.set("theme", theme);
+        console.log("Theme change ->", u.href);
+        iframe.src = u.href;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1) One intentional navigation carrying defaultQuery + theme
+      initIframeOnce();
+      // 2) If some late script overwrites src, observer above will fix it ONCE.
+    });
+
+    // Observe body class changes to notify iframe (later only)
+    new MutationObserver((muts) => {
+      for (const m of muts) if (m.attributeName === "class") updateIframeThemeLater();
+    }).observe(document.body, { attributes: true });
+
+    // Your postMessage listener (unchanged)
+    window.addEventListener("message", function (event) {
+      if (event.origin !== baseUrl) return;
+      const data = event.data;
+      if (typeof data !== "object" || !data.type) return;
+
+      switch (data.type) {
+        case "resize":
+          if (data.height) iframe.style.height = data.height + "px";
+          break;
+        case "scrollToTop":
+          iframe.scrollIntoView({ behavior: "smooth", block: "start" });
+          break;
+        case "scrollToBottom":
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          break;
+        case "copyToClipboard":
+          if (data.payload) navigator.clipboard.writeText(data.payload).catch(() => {});
+          break;
+      }
+    });
+  </script>
+</p>
