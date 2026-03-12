@@ -1,6 +1,6 @@
 "use client";
 
-import { useBrandsData, useSalonsData } from "@/lib/hooks/useSalonData";
+import { useSalonsData, useServicesData } from "@/lib/hooks/useSalonData";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,8 +13,8 @@ export const MapFilterBar = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const { allSalons, searchTerm, brandTerm } = useSalonsData();
-  const { brands: availableBrands } = useBrandsData();
+  const { allSalons, searchTerm, serviceTerm } = useSalonsData();
+  const { services: availableServices } = useServicesData();
 
   const [localSearch, setLocalSearch] = useState(searchTerm);
   const [isLocating, setIsLocating] = useState(false);
@@ -22,7 +22,7 @@ export const MapFilterBar = () => {
   // New States for dynamic fetching
   const [salonSuggestions, setSalonSuggestions] = useState<string[]>([]);
   const [showSalonDropdown, setShowSalonDropdown] = useState(false);
-  const [showBrandDropdown, setShowBrandDropdown] = useState(false);
+  const [showServiceDropdown, setShowServiceDropdown] = useState(false);
 
   // Keep local search synced with searchParams if needed
   useEffect(() => {
@@ -32,14 +32,14 @@ export const MapFilterBar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
-  const updateURL = (search: string, brand: string) => {
+  const updateURL = (search: string, service: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (search) params.set("search", search);
     else params.delete("search");
 
-    if (brand) params.set("brand", brand);
-    else params.delete("brand");
+    if (service) params.set("service", service);
+    else params.delete("service");
 
     // Reset pagination typically
     params.delete("page");
@@ -91,8 +91,8 @@ export const MapFilterBar = () => {
     const params = new URLSearchParams(searchParams.toString());
     if (term) params.set("search", term);
     else params.delete("search");
-    if (brandTerm) params.set("brand", brandTerm);
-    else params.delete("brand");
+    if (serviceTerm) params.set("service", serviceTerm);
+    else params.delete("service");
     params.delete("page");
     // Always bump _mc so MapHandler re-centers even when the same location is reselected
     params.set("_mc", Date.now().toString());
@@ -128,17 +128,17 @@ export const MapFilterBar = () => {
     setShowSalonDropdown(!showSalonDropdown);
   };
 
-  const handleBrandArrowClick = () => {
-    setShowBrandDropdown(!showBrandDropdown);
+  const handleServiceArrowClick = () => {
+    setShowServiceDropdown(!showServiceDropdown);
   };
 
-  const handleBrandSelect = (brand: string) => {
-    updateURL(searchTerm, brand);
-    setShowBrandDropdown(false);
+  const handleServiceSelect = (service: string) => {
+    updateURL(searchTerm, service);
+    setShowServiceDropdown(false);
   };
 
-  const handleBrandBlur = () => {
-    setTimeout(() => setShowBrandDropdown(false), 200);
+  const handleServiceBlur = () => {
+    setTimeout(() => setShowServiceDropdown(false), 200);
   };
 
   const handleMyLocation = () => {
@@ -293,74 +293,43 @@ export const MapFilterBar = () => {
       {/* Desktop Vertical Divider */}
       <div className="w-px h-12 bg-border-divider hidden md:block" />
 
-      {/* Brand Select Section */}
+      {/* Service Select Section */}
       <div className="flex-1 flex flex-col gap-1.5            w-full relative z-40">
         <label className="font-helvetica text-base text-text-primary block text-start leading-none">
-          {t("Brand Label")}
+          {t("Service Label")}
         </label>
-        <div className="relative flex items-center justify-between cursor-pointer" onClick={handleBrandArrowClick}>
+        <div className="relative flex items-center justify-between cursor-pointer" onClick={handleServiceArrowClick}>
           <input
             type="text"
             readOnly
-            value={brandTerm || ""}
-            placeholder={t("Select brand")}
+            value={serviceTerm || ""}
+            placeholder={t("Select Service")}
             className="w-full bg-transparent text-text-placeholder font-geist text-base md:text-sm outline-none placeholder:text-text-placeholder dark:placeholder:text-text-placeholder placeholder:font-medium placeholder:opacity-100 placeholder:leading-tight leading-tightpy-[2px] cursor-pointer"
-            onBlur={handleBrandBlur}
+            onBlur={handleServiceBlur}
           />
         </div>
 
-        {/* Brand Dropdown */}
-        {showBrandDropdown && (
+        {/* Service Dropdown */}
+        {showServiceDropdown && (
           <div className="absolute top-full left-0 w-full bg-white dark:bg-background-secondary border border-border-divider rounded-lg shadow-[0px_8px_24px_0px_#0000001F] mt-1 z-1001 max-h-60 overflow-y-auto [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-scrollbar dark:[&::-webkit-scrollbar-thumb]:bg-scrollbar [&::-webkit-scrollbar]:w-1.5">
             <div
               className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-border-divider cursor-pointer text-base md:text-sm font-geist font-light text-text-primary text-left transition-colors first:rounded-t-lg"
-              onClick={() => handleBrandSelect("")}
+              onClick={() => handleServiceSelect("")}
             >
-              {t("Select Brand")}
+              {t("Select Service")}
             </div>
-            {availableBrands.length > 0 ? (
-              availableBrands.map((b, i) => (
+            {availableServices.length > 0 ? (
+              availableServices.map((s, i) => (
                 <div
                   key={i}
                   className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-border-divider cursor-pointer text-base md:text-sm font-geist font-light text-text-primary text-left transition-colors last:rounded-b-lg"
-                  onClick={() => handleBrandSelect(b.name)}
+                  onClick={() => handleServiceSelect(s.name)}
                 >
-                  {b.name}
+                  {s.name}
                 </div>
               ))
             ) : (
-              <>
-                <div
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-border-divider cursor-pointer text-sm font-geist font-light text-text-primary text-left transition-colors"
-                  onClick={() => handleBrandSelect("K18 Hair")}
-                >
-                  K18 Hair
-                </div>
-                <div
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-border-divider cursor-pointer text-sm font-geist font-light text-text-primary text-left transition-colors"
-                  onClick={() => handleBrandSelect("Malibu C")}
-                >
-                  Malibu C
-                </div>
-                <div
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-border-divider cursor-pointer text-sm font-geist font-light text-text-primary text-left transition-colors"
-                  onClick={() => handleBrandSelect("Zenz Organic")}
-                >
-                  Zenz Organic
-                </div>
-                <div
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-border-divider cursor-pointer text-sm font-geist font-light text-text-primary text-left transition-colors"
-                  onClick={() => handleBrandSelect("Dermalogica")}
-                >
-                  Dermalogica
-                </div>
-                <div
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-border-divider cursor-pointer text-sm font-geist font-light text-text-primary text-left transition-colors last:rounded-b-lg"
-                  onClick={() => handleBrandSelect("Biguine Paris")}
-                >
-                  Biguine Paris
-                </div>
-              </>
+              <div className="px-4 py-2 text-sm text-text-secondary-1">{t("Loading services...")}</div>
             )}
           </div>
         )}

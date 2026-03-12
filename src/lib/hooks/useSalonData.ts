@@ -1,4 +1,4 @@
-import { Brand, Salon } from "@/types/schema";
+import { Salon, SalonService } from "@/types/schema";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
@@ -8,13 +8,13 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export const useSalonsData = () => {
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
-  const brandTerm = searchParams.get("brand") || "";
+  const serviceTerm = searchParams.get("service") || "";
 
   const query = useQuery({
     queryKey: ["salons"],
     queryFn: async (): Promise<Salon[]> => {
-      const response = await fetch(`${API_BASE_URL}/api/salons?salonType=SALON_ONLINE`);
-      // const response = await fetch(`${API_BASE_URL}/api/salons/dermalogica`);
+      // const response = await fetch(`${API_BASE_URL}/api/salons?salonType=SALON_ONLINE`);
+      const response = await fetch(`${API_BASE_URL}/api/salons/dermalogica`);
       if (!response.ok) {
         throw new Error("Failed to fetch salons");
       }
@@ -57,19 +57,19 @@ export const useSalonsData = () => {
       });
     }
 
-    if (brandTerm) {
-      const lowerBrand = brandTerm.toLowerCase();
+    if (serviceTerm) {
+      const lowerService = serviceTerm.toLowerCase();
       result = result.filter((salon) =>
-        salon.brands?.some((b: Brand | string) => {
+        salon.offeredServices?.some((s: SalonService | string) => {
           // Handle both string array or obj array with name property
-          const bName = typeof b === "string" ? b : b.name;
-          return bName && bName.toLowerCase() === lowerBrand;
+          const sName = typeof s === "string" ? s : s.name;
+          return sName && sName.toLowerCase() === lowerService;
         }),
       );
     }
 
     return result;
-  }, [query.data, searchTerm, brandTerm]);
+  }, [query.data, searchTerm, serviceTerm]);
 
   return {
     ...query,
@@ -77,7 +77,7 @@ export const useSalonsData = () => {
     allSalons: query.data || [],
     filteredSalons,
     searchTerm,
-    brandTerm,
+    serviceTerm,
   };
 };
 
@@ -115,13 +115,13 @@ const removeCountryName = (address?: string): string => {
   return address;
 };
 
-export const useBrandsData = () => {
+export const useServicesData = () => {
   const query = useQuery({
-    queryKey: ["brands"],
-    queryFn: async (): Promise<Brand[]> => {
-      const response = await fetch(`${API_BASE_URL}/api/brands`);
+    queryKey: ["services"],
+    queryFn: async (): Promise<SalonService[]> => {
+      const response = await fetch(`${API_BASE_URL}/api/salon-services`);
       if (!response.ok) {
-        throw new Error("Failed to fetch brands");
+        throw new Error("Failed to fetch services");
       }
       return response.json();
     },
@@ -131,6 +131,6 @@ export const useBrandsData = () => {
 
   return {
     ...query,
-    brands: query.data || [],
+    services: query.data || [],
   };
 };
