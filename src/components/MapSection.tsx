@@ -525,19 +525,19 @@ export const MapSection = ({ salons }: MapSectionProps) => {
                             : "bg-background-primary hover:bg-background-secondary/50",
                         )}
                       >
-                        {/* Brands */}
+                        {/* Services */}
                         <div className="flex flex-wrap gap-2 mb-3">
-                          {salon.brands?.slice(0, 3).map((brand, i) => (
+                          {salon.offeredServices?.slice(0, 3).map((service, i) => (
                             <span
                               key={i}
                               className="px-2 py-1 bg-brand-primary/10 rounded-sm border border-brand-primary/40 text-primary text-xs font-helvetica uppercase"
                             >
-                              {typeof brand === "string" ? brand : brand.name}
+                              {typeof service === "string" ? service : service.name}
                             </span>
                           ))}
-                          {salon.brands && salon.brands.length > 3 && (
+                          {salon.offeredServices && salon.offeredServices.length > 3 && (
                             <span className="text-xs text-text-secondary-2 mt-1 rounded-sm">
-                              +{salon.brands.length - 3}
+                              +{salon.offeredServices.length - 3}
                             </span>
                           )}
                         </div>
