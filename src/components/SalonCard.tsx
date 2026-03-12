@@ -113,20 +113,20 @@ export const SalonCard: React.FC<SalonCardProps> = ({ salon }) => {
 
         {/* Content Section */}
         <div className="flex flex-col gap-1.5 mt-1">
-          {/* Brand Tag */}
-          {salon.brands && salon.brands.length > 0 && (
+          {/* Services Tag */}
+          {salon.offeredServices && salon.offeredServices.length > 0 && (
             <div className="flex items-center gap-2 mb-1 overflow-hidden">
-              {salon.brands.slice(0, 3).map((brand, index) => (
+              {salon.offeredServices.slice(0, 3).map((service, index) => (
                 <span
                   key={index}
                   className="px-2 py-0.5 border border-brand-primary/30 rounded-sm text-sm font-helvetica uppercase tracking-wider text-text-primary group-hover:text-brand-primary bg-brand-primary/10 whitespace-nowrap transition-colors duration-300"
                 >
-                  {typeof brand === "string" ? brand : brand.name}
+                  {typeof service === "string" ? service : service.name}
                 </span>
               ))}
-              {salon.brands.length > 3 && (
+              {salon.offeredServices.length > 3 && (
                 <span className="px-2 py-0.5 border border-brand-primary/30 rounded-sm text-sm font-helvetica uppercase tracking-wider text-text-secondary-1 group-hover:text-brand-primary bg-brand-primary/10 whitespace-nowrap transition-colors duration-300">
-                  +{salon.brands.length - 3}
+                  +{salon.offeredServices.length - 3}
                 </span>
               )}
             </div>

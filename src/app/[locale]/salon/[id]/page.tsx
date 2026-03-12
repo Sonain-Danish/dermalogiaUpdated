@@ -7,7 +7,7 @@ import { SalonLocationMap } from "@/components/SalonLocationMap";
 import { SalonOpeningHours } from "@/components/SalonOpeningHours";
 import { useSalonById } from "@/lib/hooks/useSalonData";
 import { getSalonStatusAndNextTime, translateRelativeTime } from "@/lib/salonUtils";
-import { Brand, Certificate, Salon, SalonReview, SalonService } from "@/types/schema";
+import { Certificate, Salon, SalonReview, SalonService } from "@/types/schema";
 import { TFunction } from "i18next";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -57,7 +57,6 @@ export default function SalonDetailPage() {
 
   const { status, nextTime } = getSalonStatusAndNextTime(t, salon.salonTiming);
   const hasServices = salon.offeredServices && salon.offeredServices.length > 0;
-  const hasBrands = salon.brands && salon.brands.length > 0;
   const hasCertificates = salon.certificates && salon.certificates.length > 0;
   const hasReviews = salon.reviews && salon.reviews.length > 0;
 
@@ -183,21 +182,15 @@ export default function SalonDetailPage() {
                   <SectionServices salon={salon} t={t} />
                 </>
               )}
-              {hasBrands && (
-                <>
-                  {hasServices && <div className="h-px bg-border-divider w-full" />}
-                  <SectionBrands salon={salon} t={t} />
-                </>
-              )}
               {hasCertificates && (
                 <>
-                  {(hasServices || hasBrands) && <div className="h-px bg-border-divider w-full" />}
+                  {hasServices && <div className="h-px bg-border-divider w-full" />}
                   <SectionCertification salon={salon} t={t} />
                 </>
               )}
               {hasReviews && (
                 <>
-                  {(hasServices || hasBrands || hasCertificates) && <div className="h-px bg-border-divider w-full" />}
+                  {(hasServices || hasCertificates) && <div className="h-px bg-border-divider w-full" />}
                   <SectionReviews salon={salon} t={t} />
                 </>
               )}
@@ -218,21 +211,15 @@ export default function SalonDetailPage() {
               </>
             )}
             <SalonLocationMap salon={salon} />
-            {hasBrands && (
-              <>
-                {hasServices && <div className="h-px bg-border-divider w-full" />}
-                <SectionBrands salon={salon} t={t} />
-              </>
-            )}
             {hasCertificates && (
               <>
-                {(hasServices || hasBrands) && <div className="h-px bg-border-divider w-full" />}
+                {hasServices && <div className="h-px bg-border-divider w-full" />}
                 <SectionCertification salon={salon} t={t} />
               </>
             )}
             {hasReviews && (
               <>
-                {(hasServices || hasBrands || hasCertificates) && <div className="h-px bg-border-divider w-full" />}
+                {(hasServices || hasCertificates) && <div className="h-px bg-border-divider w-full" />}
                 <SectionReviews salon={salon} t={t} />
               </>
             )}
@@ -270,38 +257,15 @@ function SectionServices({ salon, t }: { salon: Salon; t: TFunction }) {
       <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helveticaNeue">
         {t("Services")}
       </h3>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 font-helveticaNeue">
+      <div className="flex flex-wrap gap-2.5 font-helveticaNeue">
         {services.map((service: SalonService, idx: number) => (
-          <li key={idx} className="flex items-center gap-3 text-text-body font-light text-sm lg:text-base">
-            <span className="w-1 h-1 rounded-full bg-text-primary shrink-0" />
+          <span
+            key={idx}
+            className="px-2 py-0.5 border border-brand-primary/30 rounded-sm text-sm font-helvetica uppercase tracking-wider text-text-primary group-hover:text-brand-primary bg-brand-primary/10 whitespace-nowrap transition-colors duration-300"
+          >
             {service.name}
-          </li>
+          </span>
         ))}
-      </ul>
-    </div>
-  );
-}
-
-function SectionBrands({ salon, t }: { salon: Salon; t: TFunction }) {
-  const brands = salon.brands || [];
-  return (
-    <div className="flex flex-col gap-6">
-      <h3 className="text-2xl uppercase tracking-widest font-light text-text-primary font-helveticaNeue">
-        {t("Brands")}
-      </h3>
-      <div className="flex flex-wrap gap-3">
-        {brands.length > 0 ? (
-          brands.map((brand: Brand, idx: number) => (
-            <span
-              key={idx}
-              className="px-2 py-1 bg-brand-primary/10 border border-brand-primary/30 rounded-sm text-text-primary text-sm uppercase tracking-wider font-helvetica font-normal"
-            >
-              {brand.name}
-            </span>
-          ))
-        ) : (
-          <span className="text-text-secondary-1 font-light italic text-sm">{t("Brands not available")}</span>
-        )}
       </div>
     </div>
   );
