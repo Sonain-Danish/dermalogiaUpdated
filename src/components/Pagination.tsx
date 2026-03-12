@@ -34,11 +34,11 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`w-10 h-10 border border-cta-bg rounded-sm flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
+              className={`w-10 h-10 border rounded-sm flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
                     ${
                       currentPage === page
-                        ? "border-text-primary text-text-primary"
-                        : "border-border-divider text-text-secondary-1 hover:border-text-primary hover:text-text-primary"
+                        ? "border-cta-bg bg-cta-bg text-cta-text"
+                        : "border-border-divider text-text-secondary-1 hover:border-cta-bg hover:text-cta-bg"
                     }`}
             >
               {page}
@@ -52,11 +52,11 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages,
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`w-10 h-10 border border-cta-bg rounded-sm flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
+              className={`w-10 h-10 border rounded-sm flex items-center hover:cursor-pointer justify-center font-helvetica text-sm transition-colors
                     ${
                       currentPage === page
-                        ? "border-text-primary text-text-primary"
-                        : "border-border-divider text-text-secondary-1 hover:border-text-primary hover:text-text-primary"
+                        ? "border-cta-bg bg-cta-bg text-cta-text"
+                        : "border-border-divider text-text-secondary-1 hover:border-cta-bg hover:text-cta-bg"
                     }`}
             >
               {page}
